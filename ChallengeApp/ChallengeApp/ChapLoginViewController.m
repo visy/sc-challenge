@@ -7,6 +7,7 @@
 
 #import "ChapLoginViewController.h"
 #import "SCUI.h"
+#import "iToast.h"
 
 @interface ChapLoginViewController ()
 
@@ -46,6 +47,9 @@
                                         NSLog(@"SoundCloud login error: %@", [error localizedDescription]);
                                     } else {
                                         NSLog(@"SoundCloud login complete");
+                                        [[[[iToast makeText:NSLocalizedString(@"Connected to SoundCloud!", @"")] 
+                                           setGravity:iToastGravityBottom] setDuration:iToastDurationNormal] show];    
+
                                     }
                                 }
         ];
@@ -57,7 +61,11 @@
 - (IBAction)logout:(UIButton *)sender {
     if ([SCSoundCloud account] != nil) {
         [SCSoundCloud removeAccess];
-        
+        [[[[iToast makeText:NSLocalizedString(@"Disconnected from SoundCloud", @"")] 
+           setGravity:iToastGravityBottom] setDuration:iToastDurationNormal] show];    
+    } else {
+        [[[[iToast makeText:NSLocalizedString(@"Not connected, doing nothing", @"")] 
+           setGravity:iToastGravityBottom] setDuration:iToastDurationNormal] show];    
     }
 }
 

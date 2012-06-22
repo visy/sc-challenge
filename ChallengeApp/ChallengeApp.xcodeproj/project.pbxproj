@@ -21,6 +21,7 @@
 		E13CD64D1593885B00E3103F /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = E13CD64C1593885B00E3103F /* second.png */; };
 		E13CD64F1593885B00E3103F /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E13CD64E1593885B00E3103F /* second@2x.png */; };
 		E13CD65615938DE800E3103F /* chap.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E13CD65515938DE800E3103F /* chap.jpg */; };
+		E1691E051594B4D10073F9FF /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = E1691E041594B4D10073F9FF /* iToast.m */; };
 		E19F166F1593948A000AB01B /* ChapTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = E19F166E1593948A000AB01B /* ChapTrack.m */; };
 		E19F16731593AD0B000AB01B /* libSoundCloudAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E19F16711593AD0B000AB01B /* libSoundCloudAPI.a */; };
 		E19F16741593AD0B000AB01B /* libSoundCloudUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E19F16721593AD0B000AB01B /* libSoundCloudUI.a */; };
@@ -57,13 +58,15 @@
 		E13CD64C1593885B00E3103F /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		E13CD64E1593885B00E3103F /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		E13CD65515938DE800E3103F /* chap.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chap.jpg; sourceTree = "<group>"; };
+		E1691E031594B4D10073F9FF /* iToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iToast.h; sourceTree = "<group>"; };
+		E1691E041594B4D10073F9FF /* iToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iToast.m; sourceTree = "<group>"; };
 		E19F166D1593948A000AB01B /* ChapTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapTrack.h; sourceTree = "<group>"; };
 		E19F166E1593948A000AB01B /* ChapTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChapTrack.m; sourceTree = "<group>"; };
-		E19F16711593AD0B000AB01B /* libSoundCloudAPI.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libSoundCloudAPI.a; path = "../CocoaSoundCloudAPI/build/Release-iphoneos/libSoundCloudAPI.a"; sourceTree = "<group>"; };
-		E19F16721593AD0B000AB01B /* libSoundCloudUI.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libSoundCloudUI.a; path = "../CocoaSoundCloudUI/build/Release-iphoneos/libSoundCloudUI.a"; sourceTree = "<group>"; };
-		E19F16751593AD11000AB01B /* libOAuth2Client.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libOAuth2Client.a; path = "../OAuth2Client/build/Release-iphoneos/libOAuth2Client.a"; sourceTree = "<group>"; };
-		E19F16771593AD17000AB01B /* libJSONKit.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libJSONKit.a; path = "../JSONKit/build/Release-iphoneos/libJSONKit.a"; sourceTree = "<group>"; };
-		E19F16791593AD1E000AB01B /* libOHAttributedLabel.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libOHAttributedLabel.a; path = "../OHAttributedLabel/build/Release-iphoneos/libOHAttributedLabel.a"; sourceTree = "<group>"; };
+		E19F16711593AD0B000AB01B /* libSoundCloudAPI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoundCloudAPI.a; path = "../CocoaSoundCloudAPI/build/Release-iphoneos/libSoundCloudAPI.a"; sourceTree = "<group>"; };
+		E19F16721593AD0B000AB01B /* libSoundCloudUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoundCloudUI.a; path = "../CocoaSoundCloudUI/build/Release-iphoneos/libSoundCloudUI.a"; sourceTree = "<group>"; };
+		E19F16751593AD11000AB01B /* libOAuth2Client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOAuth2Client.a; path = "../OAuth2Client/build/Release-iphoneos/libOAuth2Client.a"; sourceTree = "<group>"; };
+		E19F16771593AD17000AB01B /* libJSONKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libJSONKit.a; path = "../JSONKit/build/Release-iphoneos/libJSONKit.a"; sourceTree = "<group>"; };
+		E19F16791593AD1E000AB01B /* libOHAttributedLabel.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOHAttributedLabel.a; path = "../OHAttributedLabel/build/Release-iphoneos/libOHAttributedLabel.a"; sourceTree = "<group>"; };
 		E19F167B1593AD24000AB01B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E19F167D1593AD2B000AB01B /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		E19F167E1593AD2B000AB01B /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
@@ -155,6 +158,8 @@
 				E13CD64C1593885B00E3103F /* second.png */,
 				E13CD64E1593885B00E3103F /* second@2x.png */,
 				E13CD6341593885B00E3103F /* Supporting Files */,
+				E1691E031594B4D10073F9FF /* iToast.h */,
+				E1691E041594B4D10073F9FF /* iToast.m */,
 			);
 			path = ChallengeApp;
 			sourceTree = "<group>";
@@ -244,6 +249,7 @@
 				E13CD6441593885B00E3103F /* ChapLoginViewController.m in Sources */,
 				E13CD64B1593885B00E3103F /* ChapTrackViewController.m in Sources */,
 				E19F166F1593948A000AB01B /* ChapTrack.m in Sources */,
+				E1691E051594B4D10073F9FF /* iToast.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

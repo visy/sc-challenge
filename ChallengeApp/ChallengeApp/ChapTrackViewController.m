@@ -8,6 +8,10 @@
 #import "ChapTrackViewController.h"
 #import "ChapTrack.h"
 
+#import "SCUI.h"
+#import "iToast.h"
+#import "JSONKit.h"
+
 @interface ChapTrackViewController ()
 
 @end
@@ -16,41 +20,61 @@
 
 @synthesize tracks;
 
+- (IBAction)refreshTracks:(id)sender 
+{
+    SCAccount *account = [SCSoundCloud account];
+    
+    id obj = [SCRequest performMethod:SCRequestMethodGET
+                           onResource:[NSURL URLWithString:@"https://api.soundcloud.com/playlists/405726.json"]
+                      usingParameters:nil
+                          withAccount:account
+               sendingProgressHandler:nil
+                      responseHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                          // Handle the response
+                          if (error) {
+                              NSLog(@"SoundCloud request error: %@", [error localizedDescription]);
+                              [self.tracks removeAllObjects];
+                              [self.tableView reloadData];
+                              [[[[iToast makeText:NSLocalizedString(@"SoundCloud request failed!\nCheck connection and login.", @"")] 
+                                 setGravity:iToastGravityBottom] setDuration:iToastDurationNormal] show];    
+                          } else {
+                              NSLog(@"SoundCloud request complete.");
+                              [self.tracks removeAllObjects];
+                              
+                              NSDictionary *dataDict = [data objectFromJSONData];
+                              
+                              NSLog(@"%@", [dataDict description]);
+                              /*
+                              ChapTrack *track = [[ChapTrack alloc] init];
+                              track.title = @"SUCCESS: here's some parsed tracks";
+                              track.date = @"";
+                              [self.tracks addObject:track];
+                               */
+                              
+                              [self.tableView reloadData];
+
+                          }
+                      }
+              ];
+    [self.tableView reloadData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    tracks = [NSMutableArray arrayWithCapacity:100];
+
+    self.tracks = [NSMutableArray arrayWithCapacity:100];
     ChapTrack *track = [[ChapTrack alloc] init];
-    
-    track.title = @"Enjoy the silence";
-    track.date = @"1-1-1991";
-    [tracks addObject:track];
-    track = [[ChapTrack alloc] init];
-    
-    track.title = @"Personal Jesus";
-    track.date = @"15-12-2000";
-    [tracks addObject:track];
-    track = [[ChapTrack alloc] init];
-    
-    track.title = @"Let the bodies hit the floor";
-    track.date = @"9-9-1995";
-    [tracks addObject:track];
-    track = [[ChapTrack alloc] init];
-    
-    track.title = @"French God";
-    track.date = @"2-4-1899";
+    track.title = @"Press refresh!";
     [tracks addObject:track];
 
-    
-    
-	// Do any additional setup after loading the view, typically from a nib.
+    [self.tableView reloadData];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
+    [tracks removeAllObjects];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -65,7 +89,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return [self.tracks count];
+    int cc = [self.tracks count];
+	return cc;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -78,8 +103,8 @@
     // TODO: add waveform for each track image here
     
     UIView *myBackView = [[UIView alloc] initWithFrame:cell.frame];
-    myBackView.backgroundColor = [UIColor colorWithRed:0.25 green:0.25 blue:0.25 alpha:1];
-    cell.selectedBackgroundView = myBackView;
+    myBackView.backgroundColor = [UIColor colorWithRed:0.45 green:0.25 blue:0.25 alpha:1];
+    cell.backgroundView = myBackView;
     
     return cell;
 }
