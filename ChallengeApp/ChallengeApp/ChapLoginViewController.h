@@ -9,4 +9,6 @@
 
 @interface ChapLoginViewController : UIViewController
 
+- (IBAction)login:(id)sender;
+
 @end
