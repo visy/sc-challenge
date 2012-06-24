@@ -95,7 +95,8 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    if (interfaceOrientation==UIInterfaceOrientationLandscapeLeft || interfaceOrientation==UIInterfaceOrientationLandscapeRight) return NO;
+    else return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
