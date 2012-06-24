@@ -8,8 +8,9 @@
 
 @implementation ChapTrack
 
+@synthesize id;
 @synthesize title;
 @synthesize date;
-@synthesize image;
+@synthesize waveform_image;
 
 @end

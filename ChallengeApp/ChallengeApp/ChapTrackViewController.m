@@ -43,13 +43,29 @@
                               
                               NSDictionary *dataDict = [data objectFromJSONData];
                               
-                              NSLog(@"%@", [dataDict description]);
-                              /*
-                              ChapTrack *track = [[ChapTrack alloc] init];
-                              track.title = @"SUCCESS: here's some parsed tracks";
-                              track.date = @"";
-                              [self.tracks addObject:track];
-                               */
+                              NSDictionary *tracks = [dataDict objectForKey:@"tracks"];
+                                                            
+                              for (NSDictionary *tmpDict in tracks) {
+                                  NSString *track_id = [tmpDict objectForKey:@"id"];
+                                  NSString *track_title = [tmpDict objectForKey:@"title"];
+                                  NSString *track_date = [tmpDict objectForKey:@"created_at"];
+                                  NSString *track_waveform_url = [tmpDict objectForKey:@"waveform_url"];
+                                  
+                                  ChapTrack *track = [[ChapTrack alloc] init];
+                                  
+                                  track.id = track_id;
+                                  track.title = track_title;
+                                  track.date = track_date;
+                                  
+                                  NSString *waveform_url = track_waveform_url;
+                                  
+                                  NSURL *url = [NSURL URLWithString: waveform_url];
+                                  UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
+                                  
+                                  track.waveform_image = image;
+                                  
+                                  [self.tracks addObject:track];
+                              }
                               
                               [self.tableView reloadData];
 
@@ -100,13 +116,29 @@
 	cell.textLabel.text = track.title;
 	cell.detailTextLabel.text = track.date;
     
-    // TODO: add waveform for each track image here
+    // Create UIImageView with Image
     
-    UIView *myBackView = [[UIView alloc] initWithFrame:cell.frame];
-    myBackView.backgroundColor = [UIColor colorWithRed:0.45 green:0.25 blue:0.25 alpha:1];
-    cell.backgroundView = myBackView;
+    CGImageRef imageRef = CGImageCreateWithImageInRect([track.waveform_image CGImage], CGRectMake(0, 0, track.waveform_image.size.width, track.waveform_image.size.height/2));
+    
+    UIImage *backgroundImage = [UIImage imageWithCGImage:imageRef]; 
+    CGImageRelease(imageRef);
+        
+    UIImageView *myImageView = [[UIImageView alloc] initWithFrame:cell.frame];
+    [myImageView setImage:[backgroundImage stretchableImageWithLeftCapWidth:3 topCapHeight:3]]; 
+    [myImageView setUserInteractionEnabled:YES];
+        
+    cell.backgroundView = myImageView;
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+	ChapTrack *track = [self.tracks objectAtIndex:indexPath.row];
+    
+    NSString *track_url = [NSString stringWithFormat:@"soundcloud:track:%@", track.id];
+    NSLog(@"url: '%@'", track_url);
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: track_url]];
 }
 
 @end
